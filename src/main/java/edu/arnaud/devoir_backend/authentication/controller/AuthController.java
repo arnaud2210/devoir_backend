@@ -40,8 +40,10 @@ public class AuthController {
 
     @PostMapping("/reset-password")
     @JsonView(Views.Public.class)
-    public ResponseEntity<?> resetPassword(@RequestBody @Valid ResetPasswordRequest request) {
-        authService.resetPassword(request.getToken(), request.getNewPassword());
+    public ResponseEntity<?> resetPassword(
+            @RequestParam String token,
+            @RequestParam @Valid ResetPasswordRequest request) {
+        authService.resetPassword(token, request.getNewPassword());
         return ResponseEntity.ok(new ApiResponse(true,"Mot de passe mis à jour"));
     }
 }
